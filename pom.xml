@@ -21,6 +21,13 @@
             <artifactId>ojdbc8</artifactId>
             <version>19.3.0.0</version>
         </dependency>
+<!-- Latest version of ojdbc8 driver as below for reference
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>21.1.0.0</version>
+        </dependency>
+-->
 
         <dependency>
             <groupId>mysql</groupId>

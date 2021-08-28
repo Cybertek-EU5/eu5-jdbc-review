@@ -12,6 +12,11 @@ public class UtilityPractice {
 
         DBUtils.createConnection(jdbc_url,username,password);
 
+        System.out.println("DBUtils.getQueryResultMap(\"select * from regions\") = "
+                + DBUtils.getQueryResultMap("select * from regions"));
+
+        DBUtils.destroy();
+
 
     }
 

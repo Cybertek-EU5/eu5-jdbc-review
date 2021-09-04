@@ -79,6 +79,9 @@ public class JsonPathPractice {
         List<Map<String,Object>> allResultAsLstOfMap = jPath.getList("content") ;
         System.out.println("allResultAsLstOfMap = " + allResultAsLstOfMap);
 
+        // from above map , get the name of second item
+        System.out.println("allResultAsLstOfMap.get(1).get(\"name\") = "
+                + allResultAsLstOfMap.get(1).get("name"));
 
     }
 

@@ -109,7 +109,16 @@ public class SpartanDataTest {
         then()
                 .log().all()
                 .assertThat()
-                .statusCode(200);
+                .statusCode(200)
+                // verify the totalElement field value is 33 (at this moment)
+                .body("totalElement" , equalTo(33) )
+                // verify the first element name is Paige
+                .body("content[0].name" , is("Paige") )
+                // second element phone number is 3312820936
+                .body("content.phone[1]" , equalTo(3312820936L) )
+                // Check the size of entire json array and assert it has size of 33
+                .body("content", hasSize(33) ) ;
+        ;
 
 
     }

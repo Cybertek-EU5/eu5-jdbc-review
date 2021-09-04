@@ -96,6 +96,26 @@ public class SpartanDataTest {
 
     }
 
+    // https://54.237.100.89:8000/api/spartans/search?nameContains=a&gender=Female
+    @Test
+    public void testSearch(){
+
+        given()
+                .log().all()
+                .queryParam("nameContains","a")
+                .queryParam("gender","Female").
+        when()
+                .get("/spartans/search").
+        then()
+                .log().all()
+                .assertThat()
+                .statusCode(200);
+
+
+    }
+
+
+
 
 
 

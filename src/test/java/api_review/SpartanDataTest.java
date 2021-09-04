@@ -20,6 +20,15 @@ public class SpartanDataTest {
     }
 
     // GET http://54.237.100.89:8000/api/spartans/{id}
+
+    /** This is the response we got
+     * {
+     *     "id": 12,
+     *     "name": "Sol",
+     *     "gender": "Male",
+     *     "phone": 7006438852
+     * }
+     */
     @Test
     public void TestOneSpartan(){
 
@@ -43,6 +52,50 @@ public class SpartanDataTest {
 
 
     }
+    // GET http://54.237.100.89:8000/api/spartans
+    // specify we want json result back
+    // verify the first item name is "Meade"
+    // verify second item id equalTo 2'
+    // verify the size of this array is
+
+    /**
+     * [
+     *     {
+     *         "id": 1,
+     *         "name": "Meade",
+     *         "gender": "Male",
+     *         "phone": 3584128232
+     *     },
+     *     {
+     *         "id": 2,
+     *         "name": "Nels",
+     *         "gender": "Male",
+     *         "phone": 4218971348
+     *     }
+     *     the rest is omitted...
+     *   ]
+     */
+    @Test
+    public void testAllSpartans(){
+
+        given()
+                .accept(ContentType.JSON).
+        when()
+                .get("/spartans").
+        then()
+                .log().all()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                // name[0] is json path to get first json object name first
+                .body("name[0]" , is("Meade"))
+                .body("id[1]" , equalTo(2))
+                // I want to verify the size of json array is 103
+                // jsonPath to get your entire json array is "" empty string
+                .body("" , hasSize(107) )
+        ;
+
+    }
+
 
 
 

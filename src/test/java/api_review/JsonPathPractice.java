@@ -85,5 +85,29 @@ public class JsonPathPractice {
 
     }
 
+    @Test
+    public void testHR(){
+
+        //GET Http://54.237.100.89:1000/ords/hr/employees
+
+    Response response =  given()
+                                .baseUri("Http://54.237.100.89:1000")
+                                .basePath("/ords/hr").
+                        when()
+                                .get("/employees");
+        JsonPath jPath = response.jsonPath() ;
+
+        // example: salary more than 5k get first name
+        List<String> allGreaterThan5K =
+                jPath.getList("items.findAll{ it.salary > 5000 }.first_name ") ;
+        System.out.println("allGreaterThan5K = " + allGreaterThan5K);
+
+        // find out all employee last name in department id 50
+        List<String> allDep50Emp = jPath.getList("items.findAll{ it.department_id==50}.last_name") ;
+        System.out.println("allDep50Emp = " + allDep50Emp);
+
+    }
+
+
 
 }

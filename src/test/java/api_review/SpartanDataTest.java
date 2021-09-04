@@ -96,6 +96,23 @@ public class SpartanDataTest {
 
     }
 
+    // GET http://54.237.100.89:8000/api/spartans
+    // specify we want xml result back
+    // verify we got xml back
+    @Test
+    public void testXmlResponseType(){
+
+        given()
+                .accept(ContentType.XML).
+        when()
+                .get("/spartans").
+        then()
+                .assertThat()
+                .statusCode(200)
+                .contentType(ContentType.XML) ;
+
+    }
+
     // https://54.237.100.89:8000/api/spartans/search?nameContains=a&gender=Female
     @Test
     public void testSearch(){

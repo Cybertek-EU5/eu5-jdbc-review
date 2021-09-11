@@ -1,5 +1,7 @@
 package pojo;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * It is used to represent data and does not have extra functionality
  * POJO Class has 3 required part :
@@ -11,18 +13,21 @@ package pojo;
  */
 public class Spartan {
 
-    private int id;
+    @SerializedName("id") // this means : map json field "id" into below java field "myId"
+    private int myId;
+    // if the json field name is same as java field name no need for @SerializedName
+    // it will match automatically
     private String name;
     private String gender;
     private long phone ;
 
 
-    public int getId() {
-        return id;
+    public int getMyId() {
+        return myId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setMyId(int myId) {
+        this.myId = myId;
     }
 
     public String getName() {
@@ -52,7 +57,7 @@ public class Spartan {
     @Override
     public String toString() {
         return "Spartan{" +
-                "id=" + id +
+                "id=" + myId +
                 ", name='" + name + '\'' +
                 ", gender='" + gender + '\'' +
                 ", phone=" + phone +

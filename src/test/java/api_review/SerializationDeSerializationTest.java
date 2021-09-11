@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pojo.Spartan;
 
+import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.*;
@@ -52,7 +53,25 @@ public class SerializationDeSerializationTest {
 
     }
 
+    @Test
+    public void test2(){
+        // GET http://54.237.100.89:8000/api/spartans
 
+
+        Response response = get("/spartans") ;
+        //response.prettyPrint() ;
+
+        // save all the name into List<String>
+        JsonPath jp = response.jsonPath();
+        List<String> allNames =  jp.getList("name", String.class) ;
+        //System.out.println("allNames = " + allNames);
+
+        // store the result into List<Spartan>
+        List<Spartan> allSpartanPojo = jp.getList("", Spartan.class) ;
+        System.out.println("allSpartanPojo = " + allSpartanPojo);
+
+
+    }
 
 
 }

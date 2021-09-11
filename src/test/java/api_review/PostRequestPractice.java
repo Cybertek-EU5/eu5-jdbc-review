@@ -4,6 +4,7 @@ import io.restassured.http.ContentType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pojo.SpartanNoID;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -77,6 +78,22 @@ public class PostRequestPractice {
 
     }
 
+    @Test
+    public void addSpartanWithPOJO(){
+        // post body does not have id !! that's why we created new class
+        SpartanNoID bodyPOJO = new SpartanNoID("Erhan", "Male",1231231231L);
+        System.out.println("bodyPOJO = " + bodyPOJO);
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(bodyPOJO)
+                .log().body().
+        when()
+                .post("/spartans").
+        then()
+                .log().all()
+                .statusCode(201) ;
+    }
 
 
 

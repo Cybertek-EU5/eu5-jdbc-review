@@ -1,9 +1,12 @@
 package api_review;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import io.restassured.http.ContentType;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pojo.Spartan;
 import pojo.SpartanNoID;
 
 import java.util.LinkedHashMap;
@@ -81,12 +84,20 @@ public class PostRequestPractice {
     @Test
     public void addSpartanWithPOJO(){
         // post body does not have id !! that's why we created new class
-        SpartanNoID bodyPOJO = new SpartanNoID("Erhan", "Male",1231231231L);
-        System.out.println("bodyPOJO = " + bodyPOJO);
+        //SpartanNoID bodyPOJO = new SpartanNoID("Erhan", "Male",1231231231L);
+        // just using same POJO class, and it will ignore id when serializing
+        Spartan bodyPOJO = new Spartan(12,"Erhan", "Male",1231231231L);
+        // gson object that does not include fields without @Expose Annotation
+        Gson gson = new GsonBuilder()
+                    .excludeFieldsWithoutExposeAnnotation()
+                    .setPrettyPrinting().create();
+
+        String bodyStr = gson.toJson(bodyPOJO) ;
+        System.out.println("bodyStr without id = " + bodyStr);
 
         given()
                 .contentType(ContentType.JSON)
-                .body(bodyPOJO)
+                .body(bodyStr)
                 .log().body().
         when()
                 .post("/spartans").

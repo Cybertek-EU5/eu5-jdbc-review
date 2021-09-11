@@ -1,5 +1,6 @@
 package pojo;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -14,13 +15,24 @@ import com.google.gson.annotations.SerializedName;
 public class Spartan {
 
     @SerializedName("id") // this means : map json field "id" into below java field "myId"
+    // this will only use the field when deserializing and not when serializing
+    @Expose(serialize = false, deserialize = true)
     private int myId;
     // if the json field name is same as java field name no need for @SerializedName
     // it will match automatically
+    @Expose
     private String name;
+    @Expose
     private String gender;
+    @Expose
     private long phone ;
 
+    public Spartan(int myId, String name, String gender, long phone) {
+        this.myId = myId;
+        this.name = name;
+        this.gender = gender;
+        this.phone = phone;
+    }
 
     public int getMyId() {
         return myId;

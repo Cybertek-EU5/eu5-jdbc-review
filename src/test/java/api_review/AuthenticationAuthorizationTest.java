@@ -20,13 +20,39 @@ public class AuthenticationAuthorizationTest {
     }
 
     @Test
-    public void testUserRoleCanViewAllData(){
+    public void testPublicCanNotViewAnyData(){
+        given()
+                .log().all().
+        when()
+                .get("/spartans").
+        then()
+                .statusCode(401) ;
+    }
 
+
+    @Test
+    public void testUserRoleCanViewAllData(){
+        given()
+                .auth().basic("user","user")
+                .log().all().
+        when()
+                .get("/spartans").
+        then()
+                .statusCode(200) ;
     }
 
     @Test
     public void testUserRoleCannotDeleteData(){
 
+        given()
+                .auth().basic("user","user")
+                .log().all()
+                .pathParam("id", 123).
+        when()
+                .delete("/spartans/{id}").
+        then()
+                .log().all()
+                .statusCode(403) ;
     }
 
 }
